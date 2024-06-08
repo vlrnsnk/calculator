@@ -1,5 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 :root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  --background-color: #daf0ff;
+  --calculator-color: #17181a;
+  --display-digits-color: #ffffff;
+  --main-button-background-color: #303136;
+  --main-button-color: #29a8ff;
+  --grey-button-background-color: #616161;
+  --grey-button-color: #a5a5a5;
+  --dark-blue-button-background-color: #005db2;
+  --dark-blue-button-color: #339dff;
+  --light-blue-button-background-color: #1991ff;
+  --light-blue-button-color: #b2daff;
+  --higher-display-color: #818181;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+.container {
+  margin: 20px auto 0;
+  width: 375px;
+  border-radius: 35px;
+  background-color: var(--calculator-color);
+  padding: 60px 0 40px;
+}
+
+.display {
+  width: 308px;
+  min-height: 172px;
+  margin: 0 auto 40px;
+}
+
+.display__higher {
+  color: var(--higher-display-color);
+  text-align: right;
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  line-height: 150%;
+  text-align: right;
+  margin-bottom: 6px;
+}
+
+.display__lower {
+  display: block;
+  width: 100%;
+  background-color: var(--calculator-color);
+  color: var(--display-digits-color);
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  line-height: 150%;
+  text-align: right;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.btn {
+  width: 62px;
+  height: 62px;
+  background-color: var(--main-button-background-color);
+  color: var(--main-button-color);
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  line-height: 150%;
+  border-radius: 16px;
+  border: none;
+  vertical-align: center;
+  transition: filter 100ms ease-in-out;
+}
+
+.btn:hover {
+  filter: brightness(90%);
+}
+
+.btn:active {
+  filter: brightness(75%);
+}
+
+.btn--wider {
+  width: 144px;
+}
+
+.btn--higher {
+  height: 99px;
+}
+
+.btn--grey {
+  color: var(--grey-button-color);
+  background-color: var(--grey-button-background-color);
+}
+
+.btn--dark-blue {
+  color: var(--dark-blue-button-color);
+  background-color: var(--dark-blue-button-background-color);
+}
+
+.btn--light-blue {
+  color: var(--light-blue-button-color);
+  background-color: var(--light-blue-button-background-color);
+}
+
+.btn--delete {
+  font-size: 25px;
+}
+
+.delete-icon {
+  fill: var(--grey-button-color);
+}
+
+.lower-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.right-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
