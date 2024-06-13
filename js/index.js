@@ -10,9 +10,9 @@ displayEl.textContent = displayValue;
 const numberBtnList = document.querySelectorAll('.btn--number');
 const onClickNumberBtn = (event) => {
   if (displayEl.textContent === '0') {
-    displayValue = event.target.textContent;
+    displayValue = event.target.dataset.value;
   } else if (displayValue.length < 10) {
-    displayValue += event.target.textContent;
+    displayValue += event.target.dataset.value;
   }
 
   displayEl.textContent = displayValue;
@@ -28,10 +28,10 @@ const onClickOperatorBtn = (event) => {
   if (!firstNumber) {
     firstNumber = Number(displayValue);
     displayValue = '';
-    operator = event.target.textContent;
+    operator = event.target.dataset.value;
   } else {
     secondNumber = Number(displayValue);
-    operator = event.target.textContent;
+    operator = event.target.dataset.value;
     displayValue = operate(firstNumber, secondNumber, operator);
     displayEl.textContent = displayValue;
   }
