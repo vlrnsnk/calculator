@@ -65,3 +65,17 @@ const onClickAllClearBtn = () => {
 const allClearBtn = document.querySelector('.btn--all-clear');
 
 allClearBtn.addEventListener('click', onClickAllClearBtn);
+
+const onClickDeleteBtn = () => {
+  if (displayValue.length > 1 && displayValue !== '0') {
+    displayValue = displayValue.slice(0, -1);
+    displayEl.textContent = displayValue;
+  } else {
+    displayValue = '0';
+    displayEl.textContent = displayValue;
+  }
+};
+
+const deleteBtn = document.querySelector('.btn--delete');
+
+deleteBtn.addEventListener('click', onClickDeleteBtn);
