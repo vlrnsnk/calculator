@@ -22,3 +22,22 @@ const operate = (firstNumber, secondNumber, operator) => {
       return divide(firstNumber, secondNumber);
   }
 };
+
+let displayValue = '0';
+const displayEl = document.querySelector('.display__lower');
+displayEl.textContent = displayValue;
+
+const numberBtnList = document.querySelectorAll('.btn--number');
+const onClickNumberBtn = (event) => {
+  if (displayEl.textContent === '0') {
+    displayValue = event.target.textContent;
+  } else if (displayValue.length < 10) {
+    displayValue += event.target.textContent;
+  }
+
+  displayEl.textContent = displayValue;
+}
+
+Array.from(numberBtnList).map(
+  (numberBtn) => numberBtn.addEventListener('click', onClickNumberBtn)
+);
