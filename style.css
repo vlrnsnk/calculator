@@ -80,7 +80,8 @@ body {
   border-radius: 16px;
   border: none;
   vertical-align: center;
-  transition: filter 100ms ease-in-out;
+  transition: filter 100ms ease-out;
+  cursor: pointer;
 }
 
 .btn:hover {
