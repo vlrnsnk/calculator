@@ -53,3 +53,15 @@ const onClickCalculateBtn = () => {
 const calculateBtn = document.querySelector('.btn--calculate');
 
 calculateBtn.addEventListener('click', onClickCalculateBtn);
+
+const onClickAllClearBtn = () => {
+  firstNumber = '';
+  secondNumber = '';
+  operator = '';
+  displayValue = '0';
+  displayEl.textContent = displayValue;
+};
+
+const allClearBtn = document.querySelector('.btn--all-clear');
+
+allClearBtn.addEventListener('click', onClickAllClearBtn);
