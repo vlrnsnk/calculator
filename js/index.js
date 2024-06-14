@@ -30,6 +30,14 @@ deleteBtn.addEventListener('click', onClickDeleteBtn);
 const dotBtn = document.querySelector('.btn--dot');
 dotBtn.addEventListener('click', onClickDotBtn);
 
+window.addEventListener('keydown', (event) => {
+  const button = document.querySelector(`.btn[data-value="${event.key}"]`);
+
+  if (button) {
+    button.click();
+  }
+});
+
 // event handlers
 function onClickNumberBtn(event) {
   if (displayValue.length < maxDigits) {
