@@ -1,8 +1,8 @@
 import {operate} from "./math.js";
 
-let firstNumber;
-let secondNumber;
-let operator;
+let firstNumber = null;
+let secondNumber = null;
+let operator = null;
 let displayValue = '0';
 const displayEl = document.querySelector('.display__lower');
 displayEl.textContent = displayValue;
@@ -28,41 +28,56 @@ deleteBtn.addEventListener('click', onClickDeleteBtn);
 
 // event handlers
 function onClickNumberBtn(event){
-  if (displayEl.textContent === '0') {
-    displayValue = event.target.dataset.value;
-  } else if (displayValue.length < 10) {
-    displayValue += event.target.dataset.value;
+  console.log(`number | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
+
+  if (firstNumber === null) {
+    if (displayValue === '0') {
+      displayValue = event.target.dataset.value;
+    } else if (displayValue === firstNumber) {
+      displayValue = event.target.dataset.value;
+    } else {
+      displayValue += event.target.dataset.value;
+    }
+  } else {
+    if (displayValue === firstNumber) {
+      displayValue = event.target.dataset.value;
+    } else {
+      displayValue += event.target.dataset.value;
+    }
   }
 
   displayEl.textContent = displayValue;
 }
 
 function onClickOperatorBtn(event) {
+  console.log(`operator | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
+  operator = event.target.dataset.value;
+
   if (!firstNumber) {
     firstNumber = Number(displayValue);
     displayValue = '';
-    operator = event.target.dataset.value;
   } else {
     secondNumber = Number(displayValue);
-    operator = event.target.dataset.value;
     displayValue = operate(firstNumber, secondNumber, operator);
     displayEl.textContent = displayValue;
+    firstNumber = displayValue;
   }
 }
 
 function onClickCalculateBtn() {
+  console.log(`calculate | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
   secondNumber = Number(displayValue);
   displayValue = operate(firstNumber, secondNumber, operator);
   displayEl.textContent = displayValue;
-  firstNumber = '';
-  secondNumber = '';
+  firstNumber = null;
+  secondNumber = null;
   displayValue = '';
 }
 
 function onClickAllClearBtn() {
-  firstNumber = '';
-  secondNumber = '';
-  operator = '';
+  firstNumber = null;
+  secondNumber = null;
+  operator = null;
   displayValue = '0';
   displayEl.textContent = displayValue;
 }
