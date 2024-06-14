@@ -26,6 +26,9 @@ allClearBtn.addEventListener('click', onClickAllClearBtn);
 const deleteBtn = document.querySelector('.btn--delete');
 deleteBtn.addEventListener('click', onClickDeleteBtn);
 
+const dotBtn = document.querySelector('.btn--dot');
+dotBtn.addEventListener('click', onClickDotBtn);
+
 // event handlers
 function onClickNumberBtn(event) {
   if (firstNumber === null) {
@@ -96,6 +99,15 @@ function onClickDeleteBtn() {
     displayEl.textContent = displayValue;
   } else {
     displayValue = '0';
+    displayEl.textContent = displayValue;
+  }
+}
+
+function onClickDotBtn() {
+  if (displayValue.includes('.')) {
+    return;
+  } else {
+    displayValue += '.';
     displayEl.textContent = displayValue;
   }
 }
