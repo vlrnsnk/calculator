@@ -58,8 +58,7 @@ function onClickOperatorBtn(event) {
 
     if (isError(operator, secondNumber)) {
       displayEl.textContent = 'ERROR';
-      firstNumber = null;
-      secondNumber = null;
+      resetValues();
       displayValue = '';
 
       return;
@@ -81,15 +80,12 @@ function onClickCalculateBtn() {
     displayEl.textContent = displayValue;
   }
 
-  firstNumber = null;
-  secondNumber = null;
+  resetValues();
   displayValue = '';
 }
 
 function onClickAllClearBtn() {
-  firstNumber = null;
-  secondNumber = null;
-  operator = null;
+  resetValues();
   displayValue = '0';
   displayEl.textContent = displayValue;
 }
@@ -106,4 +102,10 @@ function onClickDeleteBtn() {
 
 function isError(operator, secondNumber) {
   return operator === '/' && secondNumber === 0
+}
+
+function resetValues() {
+  firstNumber = null;
+  secondNumber = null;
+  operator = null;
 }
