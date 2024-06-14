@@ -1,6 +1,7 @@
 import {operate} from "./math.js";
 
 const displayEl = document.querySelector('.display__lower');
+const displayHigherEl = document.querySelector('.display__higher');
 const numberBtnList = document.querySelectorAll('.btn--number');
 const operatorBtnList = document.querySelectorAll('.btn--operator');
 const calculateBtn = document.querySelector('.btn--calculate');
@@ -61,12 +62,15 @@ function onClickOperatorBtn(event) {
     onClickCalculateBtn();
     wasPressedEqualBtn = false;
     operator = event.target.dataset.value;
+    displayHigherEl.textContent = `${firstNumber} ${operator}`;
   } else {
     operator = event.target.dataset.value;
+    displayHigherEl.textContent = `${firstNumber} ${operator}`;
 
     if (!firstNumber) {
       firstNumber = Number(displayValue);
       displayValue = '';
+      displayHigherEl.textContent = `${firstNumber} ${operator}`;
     } else {
       if (displayValue !== '') {
         secondNumber = Number(displayValue);
@@ -101,6 +105,7 @@ function onClickCalculateBtn() {
   } else {
     displayValue = operate(firstNumber, secondNumber, operator);
     displayEl.textContent = `${roundNumber(displayValue)}`;
+    displayHigherEl.textContent += ` ${secondNumber} =`;
   }
 
   firstNumber = displayValue;
@@ -114,6 +119,7 @@ function onClickAllClearBtn() {
   resetValues();
   displayValue = '0';
   displayEl.textContent = displayValue;
+  displayHigherEl.textContent = '';
 }
 
 function onClickDeleteBtn() {
