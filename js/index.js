@@ -76,7 +76,7 @@ function onClickCalculateBtn() {
     return;
   }
 
-  secondNumber = Number(displayValue);
+  secondNumber = displayValue === '' ? firstNumber : Number(displayValue);
 
   if (isError(operator, secondNumber)) {
     displayEl.textContent = 'ERROR';
