@@ -49,25 +49,36 @@ function onClickNumberBtn(event) {
 }
 
 function onClickOperatorBtn(event) {
-  operator = event.target.dataset.value;
+  if (operator !== null) {
+    operator = event.target.dataset.value;
 
-  if (!firstNumber) {
-    firstNumber = Number(displayValue);
-    displayValue = '';
-  } else {
-    secondNumber = Number(displayValue);
-
-    if (isError(operator, secondNumber)) {
-      displayEl.textContent = 'ERROR';
-      resetValues();
-      displayValue = '';
-
+    if (displayValue !== '') {
+      onClickCalculateBtn();
+    } else {
       return;
     }
+  } else {
+    operator = event.target.dataset.value;
 
-    displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = `${roundNumber(displayValue)}`;
-    firstNumber = displayValue;
+    if (!firstNumber) {
+      firstNumber = Number(displayValue);
+      displayValue = '';
+    } else {
+      secondNumber = Number(displayValue);
+      console.log(`here | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
+
+      if (isError(operator, secondNumber)) {
+        displayEl.textContent = 'ERROR';
+        resetValues();
+        displayValue = '';
+
+        return;
+      }
+
+      displayValue = operate(firstNumber, secondNumber, operator);
+      displayEl.textContent = `${roundNumber(displayValue)}`;
+      firstNumber = displayValue;
+    }
   }
 }
 
@@ -85,7 +96,9 @@ function onClickCalculateBtn() {
     displayEl.textContent = `${roundNumber(displayValue)}`;
   }
 
-  resetValues();
+  firstNumber = displayValue;
+  secondNumber = null;
+  console.log(`after calculate | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
   displayValue = '';
 }
 
