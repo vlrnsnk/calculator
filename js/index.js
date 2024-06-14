@@ -54,8 +54,6 @@ function onClickOperatorBtn(event) {
 
     if (displayValue !== '') {
       onClickCalculateBtn();
-    } else {
-      return;
     }
   } else {
     operator = event.target.dataset.value;
@@ -65,7 +63,6 @@ function onClickOperatorBtn(event) {
       displayValue = '';
     } else {
       secondNumber = Number(displayValue);
-      console.log(`here | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
 
       if (isError(operator, secondNumber)) {
         displayEl.textContent = 'ERROR';
@@ -98,7 +95,6 @@ function onClickCalculateBtn() {
 
   firstNumber = displayValue;
   secondNumber = null;
-  console.log(`after calculate | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
   displayValue = '';
 }
 
@@ -144,5 +140,5 @@ function resetValues() {
 }
 
 function roundNumber(number) {
-  return parseFloat(Math.round(number + 'e' + maxDigits) + 'e-' + maxDigits);
+  return parseFloat(Math.round(parseFloat(number + 'e' + maxDigits)) + 'e-' + maxDigits);
 }
