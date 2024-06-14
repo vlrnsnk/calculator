@@ -142,6 +142,10 @@ function onClickDotBtn() {
 function onKeyDownHandler(event) {
   const button = document.querySelector(`.btn[data-value="${event.key}"]`);
 
+  if (event.key === 'Enter') {
+    calculateBtn.click();
+  }
+
   if (button) {
     button.click();
   }
