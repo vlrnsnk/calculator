@@ -1,5 +1,6 @@
 import {operate} from "./math.js";
 
+const maxDigits = 10;
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
@@ -68,7 +69,7 @@ function onClickOperatorBtn(event) {
     }
 
     displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = displayValue;
+    displayEl.textContent = roundNumber(displayValue);
     firstNumber = displayValue;
   }
 }
@@ -80,7 +81,7 @@ function onClickCalculateBtn() {
     displayEl.textContent = 'ERROR';
   } else {
     displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = displayValue;
+    displayEl.textContent = roundNumber(displayValue);
   }
 
   resetValues();
@@ -120,4 +121,8 @@ function resetValues() {
   firstNumber = null;
   secondNumber = null;
   operator = null;
+}
+
+function roundNumber(number) {
+  return parseFloat(Math.round(number + 'e' + maxDigits) + 'e-' + maxDigits);
 }
