@@ -77,6 +77,10 @@ function onClickOperatorBtn(event) {
 }
 
 function onClickCalculateBtn() {
+  if (operator === null) {
+    return;
+  }
+
   secondNumber = Number(displayValue);
 
   if (isError(operator, secondNumber)) {
