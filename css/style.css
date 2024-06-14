@@ -134,3 +134,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.footer {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}

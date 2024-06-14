@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
-    <div class="container">
+    <main class="container">
       <div class="display">
         <div class="display__higher"></div>
         <div class="display__lower"></div>
@@ -51,7 +51,17 @@
           <button class="btn btn--higher btn--light-blue btn--calculate" data-value="=">=</button>
         </div>
       </div>
-    </div>
+    </main>
+    <footer class="footer">
+      <p class="footer--copyright">Copyright ©
+        <script>
+          document.write(new Date().getFullYear().toString())
+        </script>
+        <a href="https://github.com/vlrnsnk" target="_blank">
+          vlrnsnk
+        </a>
+      </p>
+    </footer>
     <script src="./js/index.js" type="module"></script>
   </body>
 </html>
