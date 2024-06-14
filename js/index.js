@@ -1,42 +1,29 @@
 import {operate} from "./math.js";
 
+const displayEl = document.querySelector('.display__lower');
+const numberBtnList = document.querySelectorAll('.btn--number');
+const operatorBtnList = document.querySelectorAll('.btn--operator');
+const calculateBtn = document.querySelector('.btn--calculate');
+const allClearBtn = document.querySelector('.btn--all-clear');
+const deleteBtn = document.querySelector('.btn--delete');
+const dotBtn = document.querySelector('.btn--dot');
+
 const maxDigits = 10;
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let displayValue = '0';
-const displayEl = document.querySelector('.display__lower');
+
 displayEl.textContent = displayValue;
 
-const numberBtnList = document.querySelectorAll('.btn--number');
-Array.from(numberBtnList).map(
-  (numberBtn) => numberBtn.addEventListener('click', onClickNumberBtn)
-);
-
-const operatorBtnList = document.querySelectorAll('.btn--operator');
-Array.from(operatorBtnList).map(
-  (operatorBtn) => operatorBtn.addEventListener('click', onClickOperatorBtn)
-);
-
-const calculateBtn = document.querySelector('.btn--calculate');
+Array.from(numberBtnList).map((numberBtn) => numberBtn.addEventListener('click', onClickNumberBtn));
+Array.from(operatorBtnList).map((operatorBtn) => operatorBtn.addEventListener('click', onClickOperatorBtn));
 calculateBtn.addEventListener('click', onClickCalculateBtn);
-
-const allClearBtn = document.querySelector('.btn--all-clear');
 allClearBtn.addEventListener('click', onClickAllClearBtn);
-
-const deleteBtn = document.querySelector('.btn--delete');
 deleteBtn.addEventListener('click', onClickDeleteBtn);
-
-const dotBtn = document.querySelector('.btn--dot');
 dotBtn.addEventListener('click', onClickDotBtn);
 
-window.addEventListener('keydown', (event) => {
-  const button = document.querySelector(`.btn[data-value="${event.key}"]`);
-
-  if (button) {
-    button.click();
-  }
-});
+window.addEventListener('keydown', onKeyDownHandler);
 
 // event handlers
 function onClickNumberBtn(event) {
@@ -122,6 +109,14 @@ function onClickDotBtn() {
   if (!displayValue.includes('.')) {
     displayValue += '.';
     displayEl.textContent = displayValue;
+  }
+}
+
+function onKeyDownHandler(event) {
+  const button = document.querySelector(`.btn[data-value="${event.key}"]`);
+
+  if (button) {
+    button.click();
   }
 }
 
