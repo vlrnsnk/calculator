@@ -32,19 +32,21 @@ dotBtn.addEventListener('click', onClickDotBtn);
 
 // event handlers
 function onClickNumberBtn(event) {
-  if (firstNumber === null) {
-    if (displayValue === '0') {
-      displayValue = event.target.dataset.value;
-    } else if (displayValue === firstNumber) {
-      displayValue = event.target.dataset.value;
+  if (displayValue.length < maxDigits) {
+    if (firstNumber === null) {
+      if (displayValue === '0') {
+        displayValue = event.target.dataset.value;
+      } else if (displayValue === firstNumber) {
+        displayValue = event.target.dataset.value;
+      } else {
+        displayValue += event.target.dataset.value;
+      }
     } else {
-      displayValue += event.target.dataset.value;
-    }
-  } else {
-    if (displayValue === firstNumber) {
-      displayValue = event.target.dataset.value;
-    } else {
-      displayValue += event.target.dataset.value;
+      if (displayValue === firstNumber) {
+        displayValue = event.target.dataset.value;
+      } else {
+        displayValue += event.target.dataset.value;
+      }
     }
   }
 
@@ -69,7 +71,7 @@ function onClickOperatorBtn(event) {
     }
 
     displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = roundNumber(displayValue);
+    displayEl.textContent = `${roundNumber(displayValue)}`;
     firstNumber = displayValue;
   }
 }
@@ -81,7 +83,7 @@ function onClickCalculateBtn() {
     displayEl.textContent = 'ERROR';
   } else {
     displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = roundNumber(displayValue);
+    displayEl.textContent = `${roundNumber(displayValue)}`;
   }
 
   resetValues();
@@ -105,9 +107,7 @@ function onClickDeleteBtn() {
 }
 
 function onClickDotBtn() {
-  if (displayValue.includes('.')) {
-    return;
-  } else {
+  if (!displayValue.includes('.')) {
     displayValue += '.';
     displayEl.textContent = displayValue;
   }
