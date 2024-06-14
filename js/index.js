@@ -27,9 +27,7 @@ const deleteBtn = document.querySelector('.btn--delete');
 deleteBtn.addEventListener('click', onClickDeleteBtn);
 
 // event handlers
-function onClickNumberBtn(event){
-  console.log(`number | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
-
+function onClickNumberBtn(event) {
   if (firstNumber === null) {
     if (displayValue === '0') {
       displayValue = event.target.dataset.value;
@@ -50,7 +48,6 @@ function onClickNumberBtn(event){
 }
 
 function onClickOperatorBtn(event) {
-  console.log(`operator | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
   operator = event.target.dataset.value;
 
   if (!firstNumber) {
@@ -58,6 +55,16 @@ function onClickOperatorBtn(event) {
     displayValue = '';
   } else {
     secondNumber = Number(displayValue);
+
+    if (isError(operator, secondNumber)) {
+      displayEl.textContent = 'ERROR';
+      firstNumber = null;
+      secondNumber = null;
+      displayValue = '';
+
+      return;
+    }
+
     displayValue = operate(firstNumber, secondNumber, operator);
     displayEl.textContent = displayValue;
     firstNumber = displayValue;
@@ -65,10 +72,15 @@ function onClickOperatorBtn(event) {
 }
 
 function onClickCalculateBtn() {
-  console.log(`calculate | ${firstNumber} | ${secondNumber} | ${operator} | ${displayValue}`);
   secondNumber = Number(displayValue);
-  displayValue = operate(firstNumber, secondNumber, operator);
-  displayEl.textContent = displayValue;
+
+  if (isError(operator, secondNumber)) {
+    displayEl.textContent = 'ERROR';
+  } else {
+    displayValue = operate(firstNumber, secondNumber, operator);
+    displayEl.textContent = displayValue;
+  }
+
   firstNumber = null;
   secondNumber = null;
   displayValue = '';
@@ -90,4 +102,8 @@ function onClickDeleteBtn() {
     displayValue = '0';
     displayEl.textContent = displayValue;
   }
+}
+
+function isError(operator, secondNumber) {
+  return operator === '/' && secondNumber === 0
 }
