@@ -1,21 +1,22 @@
-import {operate} from "./math.js";
+import { operate } from "./math.js";
+import { getDisplayValue, setDisplayValue } from "./ui.js";
 
 let firstNumber;
 let secondNumber;
 let operator;
-let displayValue = '0';
-const displayEl = document.querySelector('.display__lower');
-displayEl.textContent = displayValue;
+setDisplayValue('0');
 
 const numberBtnList = document.querySelectorAll('.btn--number');
 const onClickNumberBtn = (event) => {
-  if (displayEl.textContent === '0') {
-    displayValue = event.target.dataset.value;
-  } else if (displayValue.length < 10) {
-    displayValue += event.target.dataset.value;
-  }
+  const displayValue = getDisplayValue();
 
-  displayEl.textContent = displayValue;
+  if (displayValue === '0') {
+    setDisplayValue(event.target.dataset.value);
+  } else if (firstNumber) {
+    setDisplayValue(event.target.dataset.value);
+  } else if (displayValue.length < 10) {
+    setDisplayValue(displayValue + event.target.dataset.value);
+  }
 }
 
 Array.from(numberBtnList).map(
@@ -25,15 +26,17 @@ Array.from(numberBtnList).map(
 const operatorBtnList = document.querySelectorAll('.btn--operator');
 
 const onClickOperatorBtn = (event) => {
+  const displayValue = getDisplayValue();
+
   if (!firstNumber) {
     firstNumber = Number(displayValue);
-    displayValue = '';
     operator = event.target.dataset.value;
   } else {
     secondNumber = Number(displayValue);
     operator = event.target.dataset.value;
-    displayValue = operate(firstNumber, secondNumber, operator);
-    displayEl.textContent = displayValue;
+    setDisplayValue(
+      operate(firstNumber, secondNumber, operator),
+    );
   }
 };
 
@@ -42,12 +45,12 @@ Array.from(operatorBtnList).map(
 );
 
 const onClickCalculateBtn = () => {
-  secondNumber = Number(displayValue);
-  displayValue = operate(firstNumber, secondNumber, operator);
-  displayEl.textContent = displayValue;
+  secondNumber = Number(getDisplayValue());
+  setDisplayValue(
+    operate(firstNumber, secondNumber, operator),
+  );
   firstNumber = '';
   secondNumber = '';
-  displayValue = '';
 };
 
 const calculateBtn = document.querySelector('.btn--calculate');
@@ -58,8 +61,7 @@ const onClickAllClearBtn = () => {
   firstNumber = '';
   secondNumber = '';
   operator = '';
-  displayValue = '0';
-  displayEl.textContent = displayValue;
+  setDisplayValue('0')
 };
 
 const allClearBtn = document.querySelector('.btn--all-clear');
@@ -67,12 +69,14 @@ const allClearBtn = document.querySelector('.btn--all-clear');
 allClearBtn.addEventListener('click', onClickAllClearBtn);
 
 const onClickDeleteBtn = () => {
+  const displayValue = getDisplayValue();
+
   if (displayValue.length > 1 && displayValue !== '0') {
-    displayValue = displayValue.slice(0, -1);
-    displayEl.textContent = displayValue;
+    setDisplayValue(
+      displayValue.slice(0, -1),
+    );
   } else {
-    displayValue = '0';
-    displayEl.textContent = displayValue;
+    setDisplayValue('0')
   }
 };
 
