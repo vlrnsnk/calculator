@@ -13,6 +13,7 @@ let firstNumber = null;
 let secondNumber = null;
 let operator = null;
 let displayValue = '0';
+let wasPressedEqualBtn = false;
 
 displayEl.textContent = displayValue;
 
@@ -27,6 +28,11 @@ window.addEventListener('keydown', onKeyDownHandler);
 
 // event handlers
 function onClickNumberBtn(event) {
+  if (operator === null && wasPressedEqualBtn) {
+    firstNumber = null;
+    wasPressedEqualBtn = false;
+  }
+
   if (displayValue.length < maxDigits) {
     if (firstNumber === null) {
       if (displayValue === '0') {
@@ -49,12 +55,12 @@ function onClickNumberBtn(event) {
 }
 
 function onClickOperatorBtn(event) {
-  if (operator !== null) {
-    operator = event.target.dataset.value;
+  wasPressedEqualBtn = false;
 
-    if (displayValue !== '') {
-      onClickCalculateBtn();
-    }
+  if (operator !== null) {
+    onClickCalculateBtn();
+    wasPressedEqualBtn = false;
+    operator = event.target.dataset.value;
   } else {
     operator = event.target.dataset.value;
 
@@ -62,7 +68,11 @@ function onClickOperatorBtn(event) {
       firstNumber = Number(displayValue);
       displayValue = '';
     } else {
-      secondNumber = Number(displayValue);
+      if (displayValue !== '') {
+        secondNumber = Number(displayValue);
+      } else {
+        return;
+      }
 
       if (isError(operator, secondNumber)) {
         displayEl.textContent = 'ERROR';
@@ -96,6 +106,8 @@ function onClickCalculateBtn() {
   firstNumber = displayValue;
   secondNumber = null;
   displayValue = '';
+  operator = null;
+  wasPressedEqualBtn = true;
 }
 
 function onClickAllClearBtn() {
